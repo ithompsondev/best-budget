@@ -7,6 +7,8 @@ import java.util.Currency;
 
 import org.junit.jupiter.api.Test;
 
+import com.bestbudget.money.Expense;
+import com.bestbudget.money.Income;
 import com.bestbudget.money.Money;
 
 
@@ -23,7 +25,7 @@ public class MoneyTest {
         walletB.setAmount(new BigDecimal(10.5));
         
         walletA.add(walletB);
-        assertEquals(new BigDecimal(20.5),walletA.getAmount());
+        assertEquals(new Money(ZAR,new BigDecimal(20.5)),walletA);
     }
     
     @Test
@@ -35,7 +37,7 @@ public class MoneyTest {
         walletB.setAmount(new BigDecimal(10.5));
         
         walletB.subtract(walletA);
-        assertEquals(new BigDecimal(0.5),walletB.getAmount());
+        assertEquals(new Money(ZAR,new BigDecimal(0.5)),walletB);
     }
     
     @Test
@@ -44,7 +46,7 @@ public class MoneyTest {
         walletA.setAmount(new BigDecimal(10));
         
         walletA.multiply(2);
-        assertEquals(new BigDecimal(20.0),walletA.getAmount());
+        assertEquals(new Money(ZAR,new BigDecimal(20)),walletA);
     }
     
     @Test
@@ -53,13 +55,35 @@ public class MoneyTest {
         walletA.setAmount(new BigDecimal(10));
     
         walletA.divide(2);
-        assertEquals(new BigDecimal(5.0),walletA.getAmount());
+        assertEquals(new Money(ZAR,new BigDecimal(5)),walletA);
     }
     
     @Test
     void testEqualityOfMoneyOfTheSameCurrency() {
         Money walletA = new Money(ZAR);
         Money walletB = new Money(ZAR);
+        
+        walletA.setAmount(new BigDecimal(10));
+        walletB.setAmount(new BigDecimal(10));
+        
+        assertEquals(walletA,walletB);
+    }
+    
+    @Test
+    void testEqualityOfIncomeOfTheSameCurrency() {
+        Income walletA = new Income(ZAR);
+        Income walletB = new Income(ZAR);
+        
+        walletA.setAmount(new BigDecimal(10));
+        walletB.setAmount(new BigDecimal(10));
+        
+        assertEquals(walletA,walletB);
+    }
+    
+    @Test
+    void testEqualityOfExpenseOfTheSameCurrency() {
+        Expense walletA = new Expense(ZAR);
+        Expense walletB = new Expense(ZAR);
         
         walletA.setAmount(new BigDecimal(10));
         walletB.setAmount(new BigDecimal(10));

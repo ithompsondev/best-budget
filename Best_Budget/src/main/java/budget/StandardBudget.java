@@ -72,13 +72,23 @@ public class StandardBudget implements Budget {
     
     @Override
     public Income getIncomeByLabel(String label) {
-        // TODO: Implement test before this
+        Income result = null;
+        for (Income income: incomes) {
+            if (income.getLabel().equals(label)) {
+                return income;
+            }
+        }
         return null;
     }
     
     @Override
     public Expense getExpenseByLabel(String label) {
-        // TODO: Implement test before this
+        Expense result = null;
+        for (Expense expense: expenses) {
+            if (expense.getLabel().equals(label)) {
+                return expense;
+            }
+        }
         return null;
     }
     

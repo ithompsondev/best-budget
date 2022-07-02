@@ -53,7 +53,6 @@ public class Money implements Transactionable {
     @Override
     public boolean equals(Object other) {
         Money money = (Money) other;
-        
         return money.getAmount().equals(this.getAmount());
     }
 }

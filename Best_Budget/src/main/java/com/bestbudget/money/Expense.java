@@ -3,7 +3,6 @@ package com.bestbudget.money;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-
 public class Expense extends Money {
     private String label;
     
