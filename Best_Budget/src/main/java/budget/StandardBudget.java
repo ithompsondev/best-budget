@@ -9,7 +9,7 @@ import com.bestbudget.money.Expense;
 import com.bestbudget.money.Income;
 import com.bestbudget.money.Money;
 
-
+// TODO: Document me
 public class StandardBudget implements Budget {
     private List<Income> incomes;
     private List<Expense> expenses;
@@ -23,12 +23,13 @@ public class StandardBudget implements Budget {
         
         incomes = new ArrayList<Income>();
         expenses = new ArrayList<Expense>();
+        carryOver = new Income(currency,Money.money(0));
     }
     
     // TODO: Exception handling for incomes < 0
     @Override
     public void sumAllIncomes() {
-        summedIncomes = new Income(currency,new BigDecimal(0.0));
+        summedIncomes = new Income(currency,Money.money(0.0));
         for (Income income: incomes) {
             summedIncomes.add(income);
         }
@@ -37,7 +38,7 @@ public class StandardBudget implements Budget {
     // TODO: Exception handling for expenses < 0
     @Override
     public void sumAllExpenses() {
-        summedExpenses = new Expense(currency,new BigDecimal(0.0));
+        summedExpenses = new Expense(currency,Money.money(0.0));
         for (Expense expense: expenses) {
             summedExpenses.add(expense);
         }

@@ -6,6 +6,7 @@ import java.util.Currency;
 public class Expense extends Money {
     private String label;
     
+    public Expense() {}
     public Expense(Currency currency) {
         super(currency);
     }

@@ -21,11 +21,11 @@ public class MoneyTest {
         Money walletA = new Money(ZAR);
         Money walletB = new Money(ZAR);
         
-        walletA.setAmount(new BigDecimal(10.0));
-        walletB.setAmount(new BigDecimal(10.5));
+        walletA.setAmount(Money.money(10));
+        walletB.setAmount(Money.money(10.5));
         
         walletA.add(walletB);
-        assertEquals(new Money(ZAR,new BigDecimal(20.5)),walletA);
+        assertEquals(new Money(ZAR,Money.money(20.5)),walletA);
     }
     
     @Test
@@ -33,29 +33,29 @@ public class MoneyTest {
         Money walletA = new Money(ZAR);
         Money walletB = new Money(ZAR);
     
-        walletA.setAmount(new BigDecimal(10.0));
-        walletB.setAmount(new BigDecimal(10.5));
+        walletA.setAmount(Money.money(10));
+        walletB.setAmount(Money.money(10.5));
         
         walletB.subtract(walletA);
-        assertEquals(new Money(ZAR,new BigDecimal(0.5)),walletB);
+        assertEquals(new Money(ZAR,Money.money(0.5)),walletB);
     }
     
     @Test
     void testArbitraryValueMultiplicationWithMoney() {
         Money walletA = new Money(ZAR);
-        walletA.setAmount(new BigDecimal(10));
+        walletA.setAmount(Money.money(10));
         
         walletA.multiply(2);
-        assertEquals(new Money(ZAR,new BigDecimal(20)),walletA);
+        assertEquals(new Money(ZAR,Money.money(20)),walletA);
     }
     
     @Test
     void testArbitraryValueDivisionWithMoney() {
         Money walletA = new Money(ZAR);
-        walletA.setAmount(new BigDecimal(10));
+        walletA.setAmount(Money.money(10));
     
         walletA.divide(2);
-        assertEquals(new Money(ZAR,new BigDecimal(5)),walletA);
+        assertEquals(new Money(ZAR,Money.money(5)),walletA);
     }
     
     @Test
@@ -63,8 +63,8 @@ public class MoneyTest {
         Money walletA = new Money(ZAR);
         Money walletB = new Money(ZAR);
         
-        walletA.setAmount(new BigDecimal(10));
-        walletB.setAmount(new BigDecimal(10));
+        walletA.setAmount(Money.money(10));
+        walletB.setAmount(Money.money(10));
         
         assertEquals(walletA,walletB);
     }
@@ -73,9 +73,9 @@ public class MoneyTest {
     void testEqualityOfIncomeOfTheSameCurrency() {
         Income walletA = new Income(ZAR);
         Income walletB = new Income(ZAR);
-        
-        walletA.setAmount(new BigDecimal(10));
-        walletB.setAmount(new BigDecimal(10));
+    
+        walletA.setAmount(Money.money(10));
+        walletB.setAmount(Money.money(10));
         
         assertEquals(walletA,walletB);
     }
@@ -84,9 +84,9 @@ public class MoneyTest {
     void testEqualityOfExpenseOfTheSameCurrency() {
         Expense walletA = new Expense(ZAR);
         Expense walletB = new Expense(ZAR);
-        
-        walletA.setAmount(new BigDecimal(10));
-        walletB.setAmount(new BigDecimal(10));
+    
+        walletA.setAmount(Money.money(10));
+        walletB.setAmount(Money.money(10));
         
         assertEquals(walletA,walletB);
     }

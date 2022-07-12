@@ -21,18 +21,18 @@ public class BudgetTest {
     private static final String ZAR_TEST_CURRENCY = "ZAR";
     private static final Currency ZAR = Currency.getInstance(ZAR_TEST_CURRENCY);
     private static final List<Income> incomes = Arrays.asList(new Income[] {
-            new Income(ZAR,new BigDecimal(10.00)),
-            new Income(ZAR,new BigDecimal(20.01)),
-            new Income(ZAR,new BigDecimal(30.02)),
-            new Income(ZAR,new BigDecimal(40.03)),
-            new Income(ZAR,new BigDecimal(50.05))
+            new Income(ZAR,Money.money(10)),
+            new Income(ZAR,Money.money(20.01)),
+            new Income(ZAR,Money.money(30.02)),
+            new Income(ZAR,Money.money(40.03)),
+            new Income(ZAR,Money.money(50.05))
     });
     private static final List<Expense> expenses = Arrays.asList(new Expense[] {
-            new Expense(ZAR,new BigDecimal(9.00)),
-            new Expense(ZAR,new BigDecimal(19.01)),
-            new Expense(ZAR,new BigDecimal(29.02)),
-            new Expense(ZAR,new BigDecimal(39.03)),
-            new Expense(ZAR,new BigDecimal(49.05))
+            new Expense(ZAR,Money.money(9.00)),
+            new Expense(ZAR,Money.money(19.01)),
+            new Expense(ZAR,Money.money(29.02)),
+            new Expense(ZAR,Money.money(39.03)),
+            new Expense(ZAR,Money.money(49.05))
     });
     
     // TODO: Fix, why is equality not being tested correctly
@@ -41,8 +41,8 @@ public class BudgetTest {
         Budget budget = new StandardBudget(ZAR);
         budget.setIncomes(incomes);
         
-        Income expectedSum = new Income(ZAR,new BigDecimal(0.00));
-        expectedSum.setAmount(new BigDecimal(150.11));
+        Income expectedSum = new Income(ZAR,Money.money(0));
+        expectedSum.setAmount(Money.money(150.11));
         
         budget.sumAllIncomes();
         assertEquals(expectedSum,budget.getTotalIncome());
@@ -54,7 +54,7 @@ public class BudgetTest {
         Budget budget = new StandardBudget(ZAR);
         budget.setExpenses(expenses);
     
-        Expense expectedSum = new Expense(ZAR,new BigDecimal(145.11));
+        Expense expectedSum = new Expense(ZAR,Money.money(145.11));
     
         budget.sumAllExpenses();
         assertEquals(expectedSum,budget.getTotalExpense());
@@ -66,8 +66,12 @@ public class BudgetTest {
         budget.setExpenses(expenses);
         budget.setIncomes(incomes);
         
-        Income carryOver = new Income(ZAR,new BigDecimal(0.5));
+        Income carryOver = new Income(ZAR,Money.money(5));
         
+        // Must sum all incomes and expenses before calculating carry over (Single Respons. Principle)
+        // TODO: Fix failing test here
+        budget.sumAllExpenses();
+        budget.sumAllIncomes();
         budget.calculateCarryOver();
         assertEquals(budget.getCarryOver(),carryOver);
     }
@@ -76,14 +80,15 @@ public class BudgetTest {
     void testIncomeRetrievalFromLabel() {
         List<Income> labelledIncomes = new ArrayList<Income>();
         
-        Income salary = new Income(ZAR,new BigDecimal(100));
-        Income sideHustle = new Income(ZAR,new BigDecimal(20));
+        Income salary = new Income(ZAR,Money.money(100));
+        Income sideHustle = new Income(ZAR,Money.money(20));
     
         salary.setLabel("Salary");
         sideHustle.setLabel("Side Hustle");
         
         labelledIncomes.add(salary);
         labelledIncomes.add(sideHustle);
+        
         Budget budget = new StandardBudget(ZAR);
         budget.setIncomes(labelledIncomes);
         
@@ -95,8 +100,8 @@ public class BudgetTest {
     void testExpenseRetrievalFromLabel() {
         List<Expense> labelledExpenses = new ArrayList<Expense>();
     
-        Expense grocery = new Expense(ZAR,new BigDecimal(100));
-        Expense bill = new Expense(ZAR,new BigDecimal(20));
+        Expense grocery = new Expense(ZAR,Money.money(100));
+        Expense bill = new Expense(ZAR,Money.money(20));
     
         grocery.setLabel("Groceries");
         bill.setLabel("Bills");
