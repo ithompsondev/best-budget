@@ -1,4 +1,4 @@
-package budget;
+package com.bestbudget.budget;
 
 import java.util.List;
 
@@ -7,6 +7,9 @@ import com.bestbudget.money.Income;
 import com.bestbudget.money.Money;
 
 
+/**
+ * A set of operations each type of budget is required to implement
+ */
 public interface Budget {
     public void sumAllIncomes();
     public void sumAllExpenses();

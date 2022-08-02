@@ -2,7 +2,6 @@ package money;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
@@ -10,8 +9,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import budget.Budget;
-import budget.StandardBudget;
+import com.bestbudget.budget.Budget;
+import com.bestbudget.budget.StandardBudget;
 import com.bestbudget.money.Expense;
 import com.bestbudget.money.Income;
 import com.bestbudget.money.Money;
@@ -35,7 +34,6 @@ public class BudgetTest {
             new Expense(ZAR,Money.money(49.05))
     });
     
-    // TODO: Fix, why is equality not being tested correctly
     @Test
     void testAddAllIncomesOfTheSameCurrency() {
         Budget budget = new StandardBudget(ZAR);
@@ -47,8 +45,6 @@ public class BudgetTest {
         budget.sumAllIncomes();
         assertEquals(expectedSum,budget.getTotalIncome());
     }
-    
-    // TODO: Fix, why is equality not being tested correctly
     @Test
     void testAddAllExpensesOfTheSameCurrency() {
         Budget budget = new StandardBudget(ZAR);
